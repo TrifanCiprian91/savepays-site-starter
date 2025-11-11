@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #ffffff;
+  --fg: #0E1A2B;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  color: var(--fg);
+  background: var(--bg);
+}
+
+/* Reusable classes */
+.container-max { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+.btn {
+  @apply inline-flex items-center justify-center h-12 px-6 rounded-xl bg-babyblue text-white font-medium transition hover:bg-babyblueDark;
+}
+.btn-ghost {
+  @apply inline-flex items-center justify-center h-12 px-6 rounded-xl border border-babyblue text-babyblue bg-white font-medium transition hover:text-white hover:bg-babyblue;
+}
+.card {
+  @apply bg-white rounded-2xl shadow-sm p-6;
+}
