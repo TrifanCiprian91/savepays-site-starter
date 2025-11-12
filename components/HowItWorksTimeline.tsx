@@ -29,12 +29,12 @@ export default function HowItWorksPage() {
           Cum funcționează <span className="text-babyblue">SavePays</span>
         </h1>
         <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-          Scanezi codul tău unic la parteneri și primești chitanța digitală în aplicație, semnată
-          digital, arhivată și disponibilă oricând.
+          Procesul SavePays este simplu și sigur. Scanezi codul tău unic la parteneri și primești chitanța digitală
+          în aplicație, semnată digital, arhivată și disponibilă oricând.
         </p>
       </motion.div>
 
-      {/* TIMELINE FĂRĂ PUNCTULEȚE */}
+      {/* TIMELINE */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -42,9 +42,8 @@ export default function HowItWorksPage() {
         transition={{ duration: 0.5 }}
         className="overflow-x-auto pb-6"
       >
-        <div className="min-w-[900px]">
-          {/* linie discretă */}
-          <div className="h-1 rounded-full bg-gray-200 mb-8" />
+        <div className="min-w-[900px] relative">
+          <div className="absolute top-6 left-0 right-0 h-1 bg-gray-200 rounded-full" />
           <div className="grid grid-cols-4 gap-8">
             {steps.map((s, i) => (
               <motion.div
@@ -52,10 +51,12 @@ export default function HowItWorksPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
-                transition={{ delay: i * 0.08, duration: 0.4 }}
+                transition={{ delay: i * 0.1, duration: 0.4 }}
+                className="relative"
               >
-                <div className="card text-center">
-                  <div className="text-3xl font-bold text-babyblue mb-1">{s.n}</div>
+                <div className="absolute left-1/2 -translate-x-1/2 top-4 w-3 h-3 rounded-full bg-babyblue ring-4 ring-white" />
+                <div className="card pt-10 text-center">
+                  <div className="text-3xl font-bold text-babyblue mb-2">{s.n}</div>
                   <div className="font-semibold">{s.title}</div>
                   <div className="mt-2 text-gray-600 text-sm">{s.desc}</div>
                 </div>
@@ -75,7 +76,7 @@ export default function HowItWorksPage() {
       >
         <h2 className="text-2xl font-semibold">E simplu. E rapid. E SavePays.</h2>
         <p className="mt-2 text-gray-600">
-          Încearcă versiunea pilot sau discută cu echipa noastră pentru integrare.
+          Încearcă versiunea pilot sau discută cu echipa noastră pentru integrarea în magazinul tău.
         </p>
         <a href="/contact" className="btn mt-4">Devino partener</a>
       </motion.div>
