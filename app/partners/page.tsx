@@ -1,5 +1,5 @@
 import LogoMarquee from '@/components/LogoMarquee'
-import PartnerPlan from '@/components/PartnerPlan'
+import PartnerPlans from '@/components/PartnerPlans'
 
 export default function PartnersPage() {
   return (
@@ -17,7 +17,7 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      <PartnerPlan />
+      <PartnerPlans />
 
       <section className="container-max py-12 text-center">
         <div className="inline-flex flex-col items-center justify-center gap-3 rounded-2xl p-6 md:p-8 bg-grayui">
