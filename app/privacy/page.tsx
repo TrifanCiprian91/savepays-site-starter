@@ -1,41 +1,77 @@
-export const metadata = { title: 'Politica de confidențialitate – SavePays' }
-export default function Privacy() {
+'use client'
+
+import { motion } from 'framer-motion'
+
+export default function PrivacyPage() {
   return (
-    <section className="container-max py-12">
-      <h1 className="text-3xl font-semibold">Politica de confidențialitate</h1>
-      <pre className="mt-4 whitespace-pre-wrap text-gray-700">Ultima actualizare: 2025-11-11
+    <section className="container-max py-12 md:py-16 prose prose-slate">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+        <h1 className="text-4xl font-bold text-babyblue mb-6">Politica de confidențialitate</h1>
+        <p>
+          Prezenta politică explică modul în care <strong>SC SIMPLE CEC SRL</strong> („SavePays”, „noi”,
+          „platforma”) colectează, utilizează și protejează datele personale ale utilizatorilor aplicației și
+          website-ului <strong>savepays.com</strong>.
+        </p>
 
-Această Politică de Confidențialitate explică modul în care SavePays (“noi”) colectează, folosește și protejează datele tale personale pe site-ul savepays.com.
+        <h2>1. Date colectate</h2>
+        <p>Colectăm următoarele tipuri de date:</p>
+        <ul>
+          <li>Date de identificare: nume, prenume, adresă de e-mail, cod de utilizator (QR SavePay).</li>
+          <li>Date tranzacționale: chitanțe digitale, magazine partenere, sume și date de emitere.</li>
+          <li>Date tehnice: IP, tip dispozitiv, sistem de operare, cookies de sesiune și analiză.</li>
+        </ul>
 
-1. Ce colectăm
-- Informații trimise prin formulare (nume, email, telefon, mesaj).
-- Date tehnice de analytics (pagini vizitate, IP aproximat, device).
+        <h2>2. Scopul prelucrării</h2>
+        <ul>
+          <li>Crearea și administrarea conturilor de utilizator.</li>
+          <li>Emiterea și stocarea chitanțelor digitale pentru utilizatori.</li>
+          <li>Analize și recomandări personalizate (AI Refill).</li>
+          <li>Comunicări legate de servicii și securitate.</li>
+        </ul>
 
-2. De ce folosim datele
-- Răspuns la solicitări.
-- Îmbunătățirea serviciilor (analytics).
-- Comunicări de marketing (numai cu consimțământ).
+        <h2>3. Temeiul legal</h2>
+        <p>
+          Prelucrarea se bazează pe <strong>consimțământul</strong> utilizatorului (art. 6 alin. 1 lit. a GDPR) și
+          <strong>interesul legitim</strong> al SavePays de a furniza serviciul (art. 6 alin. 1 lit. f GDPR).
+        </p>
 
-3. Baza legală
-- Interes legitim (răspuns solicitări).
-- Consimțământ (newsletter/marketing).
+        <h2>4. Durata stocării</h2>
+        <p>
+          Datele sunt păstrate pe durata existenței contului sau până la solicitarea ștergerii. Unele date contabile
+          pot fi păstrate conform legislației fiscale (5-10 ani).
+        </p>
 
-4. Păstrare & securitate
-Păstrăm datele cât este necesar și folosim măsuri rezonabile de securitate.
+        <h2>5. Drepturile utilizatorilor</h2>
+        <ul>
+          <li>Dreptul de acces, rectificare și ștergere a datelor.</li>
+          <li>Dreptul la portabilitate și opoziție.</li>
+          <li>Dreptul de retragere a consimțământului oricând.</li>
+          <li>Dreptul de a depune plângere la ANSPDCP (www.dataprotection.ro).</li>
+        </ul>
 
-5. Drepturile tale
-Acces, rectificare, ștergere, opoziție, portabilitate. Ne poți contacta la contact@savepays.com.
+        <h2>6. Partajarea datelor</h2>
+        <p>
+          Datele pot fi partajate cu furnizori de servicii IT, procesatori de plăți, parteneri comerciali autorizați
+          și autorități publice în baza obligațiilor legale. Nu vindem datele către terți.
+        </p>
 
-6. Terți
-Folosim servicii precum Google Analytics și Formspree. Politicile lor se aplică datelor colectate prin serviciile respective.
+        <h2>7. Securitate</h2>
+        <p>
+          Folosim criptare TLS, autentificare Firebase și măsuri interne pentru a preveni accesul neautorizat la date.
+        </p>
 
-7. Cookie-uri
-Folosim cookie-uri pentru funcționare și analytics. Poți gestiona preferințele în banner.
+        <h2>8. Contact</h2>
+        <p>
+          Pentru orice solicitare privind protecția datelor, ne poți contacta la:{' '}
+          <a href="mailto:contact@savepays.com" className="text-babyblue">
+            contact@savepays.com
+          </a>
+        </p>
 
-8. Contact
-Pentru întrebări: contact@savepays.com
-
-*Acest text este informativ și nu reprezintă consultanță juridică.*</pre>
+        <p className="text-sm text-gray-500 mt-6">
+          Ultima actualizare: {new Date().toLocaleDateString('ro-RO')}
+        </p>
+      </motion.div>
     </section>
   )
 }
