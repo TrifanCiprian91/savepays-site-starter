@@ -5,7 +5,7 @@ export default function Header() {
     <header className="border-b border-gray-100">
       <div className="container-max flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <img src="/savepay-logo.png" alt="SavePays" className="h-8" />
+          <img src="/savepays-logo.png" alt="SavePays" className="h-10" />
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <Link href="/how-it-works">Cum funcționează</Link>

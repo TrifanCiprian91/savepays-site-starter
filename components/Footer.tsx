@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container-max py-12 grid md:grid-cols-4 gap-8 text-sm">
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <img src="/savepay-logo.png" alt="SavePays" className="h-8" />
+            <img src="/savepays-logo.png" alt="SavePays" className="h-10" />
           </div>
           <p className="text-gray-600">Bonurile tale, digital. Simplu, sigur și eco.</p>
         </div>

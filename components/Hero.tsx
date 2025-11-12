@@ -1,4 +1,6 @@
+// components/Hero.tsx
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Hero() {
   return (
@@ -22,9 +24,19 @@ export default function Hero() {
           Deja pregătit pentru comercianți, ONG-uri și evenimente.
         </div>
       </div>
-      <div className="card">
-        <div className="aspect-[9/16] bg-grayui rounded-xl" />
-        <div className="mt-4 text-sm text-gray-500">Mockup aplicație (înlocuiește cu screenshot real).</div>
+
+      {/* Mockup aplicație */}
+      <div className="card p-3 md:p-4">
+        <div className="rounded-xl overflow-hidden">
+          <Image
+            src="/mockup-app.png"
+            alt="Cardul meu SavePay – mockup"
+            width={900}  // Next optimizează, se scalează automat
+            height={1600}
+            className="w-full h-auto"
+            priority
+          />
+        </div>
       </div>
     </section>
   )
