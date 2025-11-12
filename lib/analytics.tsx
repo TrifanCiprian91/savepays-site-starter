@@ -1,7 +1,8 @@
 'use client'
 
 import Script from 'next/script'
-import { hasConsent, onConsentChange } from '@/lib/consent'
+import { hasConsent, onConsentChange } from './consent'
+
 import { useEffect, useState } from 'react'
 
 export default function GoogleAnalytics({ gaId }: { gaId?: string }) {
