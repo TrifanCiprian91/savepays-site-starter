@@ -3,6 +3,7 @@ import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import GoogleAnalytics from '@/lib/analytics'
+import CookieConsent from '@/components/CookieConsent'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://savepays.com'),
@@ -19,12 +20,10 @@ export const metadata: Metadata = {
     locale: 'ro_RO',
     type: 'website',
   },
-  // ✅ forțăm browserele (inclusiv Safari) să ia icon-urile corecte
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
-  // (opțional) card frumos când pui linkul pe Twitter/X
   twitter: {
     card: 'summary_large_image',
     title: 'SavePays – Bonuri digitale & chitanțe electronice',
@@ -36,13 +35,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const GA_ID = process.env.NEXT_PUBLIC_GA_ID
+
   return (
     <html lang="ro">
       <body>
+        {/* GA se încarcă DOAR dacă există consimțământ „Analitice” (vezi lib/analytics.tsx) */}
         <GoogleAnalytics gaId={GA_ID} />
+
         <Header />
         <main>{children}</main>
         <Footer />
+
+        {/* Bannerul de consimțământ cookie + preferințe */}
+        <CookieConsent />
       </body>
     </html>
   )
