@@ -5,7 +5,6 @@ import { useCallback } from 'react'
 
 export default function Footer() {
   const openCookiePrefs = useCallback(() => {
-    // deschide direct panoul „Preferințe” din bannerul de cookies
     window.dispatchEvent(new Event('open_cookie_prefs'))
   }, [])
 

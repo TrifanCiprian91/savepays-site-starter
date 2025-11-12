@@ -1,19 +1,17 @@
 'use client'
 
 import Script from 'next/script'
-import { hasConsent, onConsentChange } from './consent'
-
+import { hasConsent, onConsentChange } from '@/lib/consent'
 import { useEffect, useState } from 'react'
 
 export default function GoogleAnalytics({ gaId }: { gaId?: string }) {
   const [allow, setAllow] = useState<boolean>(() => !!gaId && hasConsent('analytics'))
 
   useEffect(() => {
-    // când se schimbă consimțământul, recalculează “allow”
     const unsub = onConsentChange(() => {
       setAllow(!!gaId && hasConsent('analytics'))
     })
-    // dacă se schimbă gaId la runtime (rar), resinc
+    // sync inițial (în caz că gaId vine din env asinc)
     setAllow(!!gaId && hasConsent('analytics'))
     return unsub
   }, [gaId])

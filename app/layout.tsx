@@ -39,14 +39,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ro">
       <body>
-        {/* GA se încarcă DOAR dacă există consimțământ „Analitice” (vezi lib/analytics.tsx) */}
         <GoogleAnalytics gaId={GA_ID} />
-
         <Header />
         <main>{children}</main>
         <Footer />
-
-        {/* Bannerul de consimțământ cookie + preferințe */}
         <CookieConsent />
       </body>
     </html>
