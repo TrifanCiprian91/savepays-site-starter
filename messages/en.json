@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "how": "How it works",
+    "partners": "Partners",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+
+  "cta": {
+    "getStarted": "Get started"
+  },
+
+  "hero": {
+    "title": "Digital receipts & loyalty in one app",
+    "subtitle": "Scan your QR code, get the receipt, earn rewards."
+  },
+
+  "cookie": {
+    "title": "Cookie preferences",
+    "desc": "We use cookies for operation, analytics and marketing.",
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject",
+    "manage": "Manage",
+    "necessary": "Necessary",
+    "analytics": "Analytics",
+    "marketing": "Marketing"
+  },
+
+  "plans": {
+    "title": "Partner plans",
+    "recommended": "Recommended",
+    "starter": {
+      "name": "Starter",
+      "price": "€0",
+      "period": "/month",
+      "features": [
+        "Digital receipt issuing (up to 100/mo)",
+        "Partner dashboard (basic)",
+        "Email support"
+      ],
+      "cta": "Try for free"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "€49",
+      "period": "/month",
+      "features": [
+        "Unlimited receipts",
+        "Digital signature on download",
+        "Recommendations & refill",
+        "e-Invoice export (ready)",
+        "Priority support"
+      ],
+      "cta": "Become a partner"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Custom",
+      "period": "",
+      "features": [
+        "SavePay white-label",
+        "Dedicated SLA",
+        "ERP integration",
+        "Multi-location & reporting"
+      ],
+      "cta": "Request a quote"
+    }
+  },
+
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "name@email.com",
+    "subjectPlaceholder": "E.g. Retail pilot in 3 locations",
+    "messagePlaceholder": "Tell us briefly what you need…",
+    "defaultSubject": "New message",
+    "send": "Send message",
+    "sending": "Sending…",
+    "thanks": "Thanks! Your message has been prepared for sending.",
+    "error": "Oops, something went wrong. Check the fields and try again."
+  },
+
+  "blog": {
+    "title": "SavePays Blog",
+    "subtitle": "News about digital receipts, legislation, integrations and pilot stories.",
+    "posts": {
+      "p1": {
+        "date": "10.11.2025",
+        "title": "Why digital receipts in 2025",
+        "desc": "Benefits for users, retailers and the environment. How we prepare for digitalisation.",
+        "cta": "Read"
+      },
+      "p2": {
+        "date": "08.11.2025",
+        "title": "How SavePays works",
+        "desc": "Unique QR, digital issuing, signature on download and smart history.",
+        "cta": "Read"
+      },
+      "p3": {
+        "date": "05.11.2025",
+        "title": "Retail pilot: integration steps",
+        "desc": "What a SavePays pilot means in your store and how we launch it in 7 days.",
+        "cta": "Read"
+      }
+    }
+  }
+}

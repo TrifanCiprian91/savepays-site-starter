@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "home": "Acasă",
+    "about": "Despre",
+    "how": "Cum funcționează",
+    "partners": "Parteneri",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+
+  "cta": {
+    "getStarted": "Începe acum"
+  },
+
+  "hero": {
+    "title": "Chitanțe digitale și loialitate, într-o singură aplicație",
+    "subtitle": "Scanezi codul QR, primești chitanța, câștigi beneficii."
+  },
+
+  "cookie": {
+    "title": "Preferințe cookie",
+    "desc": "Folosim cookie-uri pentru funcționare, analiză și marketing.",
+    "acceptAll": "Acceptă tot",
+    "rejectAll": "Respinge",
+    "manage": "Personalizează",
+    "necessary": "Necesare",
+    "analytics": "Analitice",
+    "marketing": "Marketing"
+  },
+
+  "plans": {
+    "title": "Planuri pentru parteneri",
+    "recommended": "Recomandat",
+    "starter": {
+      "name": "Starter",
+      "price": "€0",
+      "period": "/lună",
+      "features": [
+        "Emitere bon digital (max 100/lună)",
+        "Dashboard partener (basic)",
+        "Suport prin email"
+      ],
+      "cta": "Încearcă gratuit"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "€49",
+      "period": "/lună",
+      "features": [
+        "Bonuri nelimitate",
+        "Semnătură digitală la descărcare",
+        "Recomandări & refill",
+        "Export e-Factura (pregătit)",
+        "Suport prioritar"
+      ],
+      "cta": "Devino partener"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Custom",
+      "period": "",
+      "features": [
+        "White-label SavePay",
+        "SLA dedicat",
+        "Integrare ERP",
+        "Multiple locații & rapoarte"
+      ],
+      "cta": "Cere ofertă"
+    }
+  },
+
+  "contact": {
+    "name": "Nume",
+    "email": "Email",
+    "subject": "Subiect",
+    "message": "Mesaj",
+    "namePlaceholder": "Numele tău",
+    "emailPlaceholder": "nume@email.com",
+    "subjectPlaceholder": "Ex: Pilot retail în 3 locații",
+    "messagePlaceholder": "Spune-ne pe scurt ce îți dorești…",
+    "defaultSubject": "Mesaj nou",
+    "send": "Trimite mesajul",
+    "sending": "Se trimite…",
+    "thanks": "Mulțumim! Mesajul tău a fost pregătit pentru trimitere.",
+    "error": "Ups, nu am reușit. Verifică datele și încearcă din nou."
+  },
+
+  "blog": {
+    "title": "Blogul SavePays",
+    "subtitle": "Noutăți despre digitalizarea bonurilor, legislație, integrare și povești din pilot.",
+    "posts": {
+      "p1": {
+        "date": "10.11.2025",
+        "title": "De ce bonuri digitale în 2025",
+        "desc": "Beneficii pentru utilizatori, comercianți și mediu. Cum ne pregătim pentru digitalizare.",
+        "cta": "Citește"
+      },
+      "p2": {
+        "date": "08.11.2025",
+        "title": "Cum funcționează SavePays",
+        "desc": "QR unic, emitere digitală, semnătură la descărcare și istoric inteligent.",
+        "cta": "Citește"
+      },
+      "p3": {
+        "date": "05.11.2025",
+        "title": "Pilot pentru retail: pașii de integrare",
+        "desc": "Ce presupune un pilot SavePays în magazinul tău și cum îl pornim în 7 zile.",
+        "cta": "Citește"
+      }
+    }
+  }
+}

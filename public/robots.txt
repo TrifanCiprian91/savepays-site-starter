@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://savepays.com
+
+# Sitemaps
+Sitemap: https://savepays.com/sitemap.xml

@@ -1,83 +1,93 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import Link from 'next/link'
+import {motion} from 'framer-motion';
+import {Link} from '@/navigation';
+import {useTranslations} from 'next-intl';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4 } }
-}
-
-const plans = [
-  {
-    name: 'Starter',
-    price: '€0',
-    period: '/lună',
-    features: [
-      'Emitere bon digital (max 100/lună)',
-      'Dashboard partener (basic)',
-      'Suport prin email',
-    ],
-    cta: 'Încearcă gratuit',
-    href: '/contact'
-  },
-  {
-    name: 'Pro',
-    highlight: true,
-    price: '€49',
-    period: '/lună',
-    features: [
-      'Bonuri nelimitate',
-      'Semnătură digitală la descărcare',
-      'Recomandări & refill',
-      'Export e-Factura (pregătit)',
-      'Suport prioritar',
-    ],
-    cta: 'Devino partener',
-    href: '/contact'
-  },
-  {
-    name: 'Enterprise',
-    price: 'Custom',
-    period: '',
-    features: [
-      'White-label SavePay',
-      'SLA dedicat',
-      'Integrare ERP',
-      'Multiple locații & rapoarte',
-    ],
-    cta: 'Cere ofertă',
-    href: '/contact'
-  },
-]
+  hidden: {opacity: 0, y: 20},
+  show: {opacity: 1, y: 0, transition: {duration: 0.4}}
+};
 
 export default function PartnerPlans() {
+  const t = useTranslations('plans'); // vezi cheile în messages/*.json
+
+  // Construim planurile din mesaje (fără text hardcodat)
+  const plans = [
+    {
+      key: 'starter',
+      name: t('starter.name'),
+      price: t('starter.price'),
+      period: t('starter.period'),
+      features: [
+        t('starter.features.0'),
+        t('starter.features.1'),
+        t('starter.features.2')
+      ],
+      cta: t('starter.cta'),
+      href: '/contact',
+      highlight: false
+    },
+    {
+      key: 'pro',
+      name: t('pro.name'),
+      price: t('pro.price'),
+      period: t('pro.period'),
+      features: [
+        t('pro.features.0'),
+        t('pro.features.1'),
+        t('pro.features.2'),
+        t('pro.features.3'),
+        t('pro.features.4')
+      ],
+      cta: t('pro.cta'),
+      href: '/contact',
+      highlight: true,
+      badge: t('recommended')
+    },
+    {
+      key: 'enterprise',
+      name: t('enterprise.name'),
+      price: t('enterprise.price'),
+      period: t('enterprise.period'),
+      features: [
+        t('enterprise.features.0'),
+        t('enterprise.features.1'),
+        t('enterprise.features.2'),
+        t('enterprise.features.3')
+      ],
+      cta: t('enterprise.cta'),
+      href: '/contact',
+      highlight: false
+    }
+  ];
+
   return (
     <section className="container-max py-12">
       <motion.h2
         variants={fadeUp}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true }}
+        viewport={{once: true}}
         className="text-2xl md:text-3xl font-semibold text-center"
       >
-        Planuri pentru parteneri
+        {t('title')}
       </motion.h2>
 
       <div className="mt-8 grid md:grid-cols-3 gap-6">
         {plans.map((p) => (
           <motion.div
-            key={p.name}
+            key={p.key}
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-80px' }}
-            whileHover={{ y: -8, boxShadow: '0 24px 48px rgba(0,0,0,0.08)' }}
+            viewport={{once: true, margin: '-80px'}}
+            whileHover={{y: -8, boxShadow: '0 24px 48px rgba(0,0,0,0.08)'}}
             className={`card relative ${p.highlight ? 'ring-2 ring-babyblue' : ''}`}
           >
-            {p.highlight && (
+            {p.highlight && p.badge && (
               <div className="absolute -top-3 right-4 text-xs px-2 py-1 rounded-full bg-babyblue text-white">
-                Recomandat
+                {p.badge}
               </div>
             )}
             <div className="font-semibold text-lg">{p.name}</div>
@@ -86,8 +96,8 @@ export default function PartnerPlans() {
               <div className="text-gray-500">{p.period}</div>
             </div>
             <ul className="mt-4 space-y-2 text-gray-600">
-              {p.features.map((f) => (
-                <li key={f} className="flex gap-2">
+              {p.features.map((f, i) => (
+                <li key={i} className="flex gap-2">
                   <span className="text-babyblue">✓</span>
                   <span>{f}</span>
                 </li>
@@ -100,5 +110,5 @@ export default function PartnerPlans() {
         ))}
       </div>
     </section>
-  )
+  );
 }

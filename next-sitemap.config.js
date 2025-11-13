@@ -1,6 +1,6 @@
-/** @type {import('next-sitemap').IConfig} */
-module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://savepays.com',
+// next-sitemap.config.js
+export default {
+  siteUrl: 'https://savepays.com',
   generateRobotsTxt: true,
-  generateIndexSitemap: true,
+  sitemapSize: 7000
 };

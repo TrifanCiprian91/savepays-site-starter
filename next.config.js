@@ -1,9 +1,16 @@
-/** @type {import('next').NextConfig} */
+// next.config.js  (ESM)
+import createNextIntlPlugin from 'next-intl/plugin';
+
+// ✅ indica explicit fișierul de request-config
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
+
 const nextConfig = {
-  images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: '**' }
-    ]
+  reactStrictMode: true,
+  images: {domains: []},
+  experimental: {
+    // mic hack care a redus false-pozitivele la unele setup-uri
+    turbopack: {}
   }
-}
-module.exports = nextConfig;
+};
+
+export default withNextIntl(nextConfig);

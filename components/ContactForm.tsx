@@ -1,74 +1,129 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { useState } from 'react'
+import {motion} from 'framer-motion';
+import {useState} from 'react';
+import {useTranslations} from 'next-intl';
+import {useLocale} from 'next-intl';
+
+type FormState = 'idle' | 'loading' | 'sent' | 'error';
 
 export default function ContactForm() {
-  const [sent, setSent] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const t = useTranslations('contact');
+  const locale = useLocale();
+  const [state, setState] = useState<FormState>('idle');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const data = new FormData(e.currentTarget)
-    const name = String(data.get('name') || '')
-    const email = String(data.get('email') || '')
-    const subject = String(data.get('subject') || 'Mesaj nou')
-    const message = String(data.get('message') || '')
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setState('loading');
 
-    // fallback: deschidem clientul de mail cu precompletare
+    const data = new FormData(e.currentTarget);
+    const name = String(data.get('name') || '');
+    const email = String(data.get('email') || '');
+    const subject = String(data.get('subject') || t('defaultSubject'));
+    const message = String(data.get('message') || '');
+
+    // Validări minime
+    if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setState('error');
+      return;
+    }
+
+    // 1) Dacă ai endpoint API activ (ex: /api/contact), încearcă POST
+    try {
+      const endpoint = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || '/api/contact';
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name, email, subject, message, locale})
+      });
+
+      if (res.ok) {
+        setState('sent');
+        (e.currentTarget as HTMLFormElement).reset();
+        return;
+      }
+      // Dacă nu e OK, facem fallback la mailto
+    } catch {
+      // ignorăm, vom face fallback
+    }
+
+    // 2) Fallback: deschide clientul de mail cu precompletare
     const mailto = `mailto:contact@savepays.com?subject=${encodeURIComponent(
-      `[SavePays] ${subject}`
-    )}&body=${encodeURIComponent(`Nume: ${name}\nEmail: ${email}\n\n${message}`)}`
-    setLoading(true)
-    window.location.href = mailto
-    setTimeout(() => {
-      setLoading(false)
-      setSent(true)
-      ;(e.currentTarget as HTMLFormElement).reset()
-    }, 800)
-  }
+      `[SavePay] ${subject}`
+    )}&body=${encodeURIComponent(`Nume: ${name}\nEmail: ${email}\n\n${message}`)}`;
+
+    try {
+      window.location.href = mailto;
+      setTimeout(() => {
+        setState('sent');
+        (e.currentTarget as HTMLFormElement).reset();
+      }, 800);
+    } catch {
+      setState('error');
+    }
+  };
 
   return (
     <motion.form
       onSubmit={handleSubmit}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
+      initial={{opacity: 0, y: 20}}
+      whileInView={{opacity: 1, y: 0}}
+      viewport={{once: true}}
+      transition={{duration: 0.4}}
       className="space-y-4"
+      aria-busy={state === 'loading'}
     >
       <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <label className="text-sm text-gray-600">Nume</label>
-          <input name="name" required className="input" placeholder="Numele tău" />
+          <label className="text-sm text-gray-600" htmlFor="name">{t('name')}</label>
+          <input id="name" name="name" required className="input" placeholder={t('namePlaceholder')} />
         </div>
         <div>
-          <label className="text-sm text-gray-600">Email</label>
-          <input type="email" name="email" required className="input" placeholder="nume@email.com" />
+          <label className="text-sm text-gray-600" htmlFor="email">{t('email')}</label>
+          <input id="email" type="email" name="email" required className="input" placeholder={t('emailPlaceholder')} />
         </div>
       </div>
+
       <div>
-        <label className="text-sm text-gray-600">Subiect</label>
-        <input name="subject" className="input" placeholder="Ex: Pilot retail în 3 locații" />
-      </div>
-      <div>
-        <label className="text-sm text-gray-600">Mesaj</label>
-        <textarea name="message" className="input min-h-[140px]" placeholder="Spune-ne pe scurt ce îți dorești …" />
+        <label className="text-sm text-gray-600" htmlFor="subject">{t('subject')}</label>
+        <input id="subject" name="subject" className="input" placeholder={t('subjectPlaceholder')} />
       </div>
 
-      <button className="btn w-full md:w-auto" type="submit" disabled={loading}>
-        {loading ? 'Se trimite…' : 'Trimite mesajul'}
+      <div>
+        <label className="text-sm text-gray-600" htmlFor="message">{t('message')}</label>
+        <textarea
+          id="message"
+          name="message"
+          className="input min-h-[140px]"
+          placeholder={t('messagePlaceholder')}
+        />
+      </div>
+
+      <button className="btn w-full md:w-auto" type="submit" disabled={state === 'loading'}>
+        {state === 'loading' ? t('sending') : t('send')}
       </button>
 
-      {sent && (
+      {state === 'sent' && (
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{opacity: 0, y: 8}}
+          animate={{opacity: 1, y: 0}}
           className="text-sm text-green-700 bg-green-50 border border-green-200 rounded-xl px-3 py-2"
+          role="status"
         >
-          Mulțumim! Deschidem clientul tău de email pentru trimitere.
+          {t('thanks')}
+        </motion.div>
+      )}
+
+      {state === 'error' && (
+        <motion.div
+          initial={{opacity: 0, y: 8}}
+          animate={{opacity: 1, y: 0}}
+          className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl px-3 py-2"
+          role="alert"
+        >
+          {t('error')}
         </motion.div>
       )}
     </motion.form>
-  )
+  );
 }
