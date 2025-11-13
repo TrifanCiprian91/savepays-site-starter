@@ -1,16 +1,20 @@
 // i18n/request.ts
 import {getRequestConfig} from 'next-intl/server';
-import {routing} from './routing';
 
 export default getRequestConfig(async ({locale}) => {
-  const safeLocale = (locale && routing.locales.includes(locale as any))
-    ? (locale as (typeof routing.locales)[number])
-    : routing.defaultLocale;
+  // Limbi suportate în site
+  const supportedLocales = ['ro', 'en'] as const;
+  const defaultLocale = 'ro';
 
-  const messages = (await import(`../messages/${safeLocale}.json`)).default;
+  // Dacă nu vine nimic sau vine ceva aiurea, folosim 'ro'
+  const finalLocale =
+    locale && (supportedLocales as readonly string[]).includes(locale)
+      ? locale
+      : defaultLocale;
 
   return {
-    locale: safeLocale,
-    messages
+    // aici forțăm string, ca să nu mai fie niciun 'undefined' în joc
+    locale: finalLocale as string,
+    messages: {}
   };
 });

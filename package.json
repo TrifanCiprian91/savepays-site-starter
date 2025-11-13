@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "NEXT_INTL_CONFIG=./next-intl.config.js next dev",
-    "build": "NEXT_INTL_CONFIG=./next-intl.config.js next build",
+    "build": "next build",
     "start": "NEXT_INTL_CONFIG=./next-intl.config.js next start",
     "lint": "next lint",
     "postbuild": "next-sitemap"

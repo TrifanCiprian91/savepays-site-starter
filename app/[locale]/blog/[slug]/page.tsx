@@ -1,53 +1,81 @@
-'use client'
+// app/[locale]/blog/[slug]/page.tsx
+import {notFound} from 'next/navigation';
 
-import { useParams } from 'next/navigation'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
+type BlogPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+};
 
-const posts: Record<string, { title: string; content: string; date: string }> = {
-  'de-ce-bonuri-digitale': {
-    title: 'De ce bonuri digitale în 2025',
-    date: '2025-11-10',
-    content:
-      'Bonurile digitale reduc costurile, elimină risipa de hârtie și cresc transparența. SavePays oferă emitere rapidă, semnătură digitală la descărcare și un istoric clar pentru clienți.',
-  },
-  'cum-functioneaza-savepays': {
-    title: 'Cum funcționează SavePays',
-    date: '2025-11-08',
-    content:
-      'Utilizatorii au un cod QR unic. La casă, partenerul scanează și emite chitanța digitală. Documentul se salvează în aplicație, iar la descărcare se atașează semnătura digitală a comerciantului.',
-  },
-  'pilot-pentru-retail': {
-    title: 'Pilot pentru retail: pașii de integrare',
-    date: '2025-11-05',
-    content:
-      'Pornim cu analiza fluxului de plată, configurăm API-ul de emitere, testăm în sandbox și în 7 zile putem rula pilotul în prima locație.',
-  },
+// Mini-dată hardcodată, ca să putem genera static paginile.
+// Poți muta asta ulterior într-un fișier separat sau într-un CMS.
+const postsByLocale: Record<string, BlogPost[]> = {
+  ro: [
+    {
+      slug: 'de-ce-savepay',
+      title: 'De ce SavePay: chitanțe digitale și loialitate într-un singur loc',
+      excerpt: 'Află cum te ajută SavePay să scapi de bonurile de hârtie și să câștigi beneficii la fiecare cumpărătură.',
+      content: `SavePay îți centralizează toate bonurile într-o singură aplicație, printr-un cod QR unic. 
+Nu mai cauți bonuri prin portofel sau poze vechi, iar în același timp poți beneficia de programe de loialitate, cashback și oferte personalizate.`
+    }
+  ],
+  en: [
+    {
+      slug: 'why-savepay',
+      title: 'Why SavePay: digital receipts & loyalty in one place',
+      excerpt: 'Discover how SavePay helps you get rid of paper receipts and earn rewards with every purchase.',
+      content: `SavePay centralizes all your receipts in one app, using a unique QR code. 
+You no longer have to search through your wallet or gallery for receipts, while also accessing loyalty programs, cashback and tailored offers.`
+    }
+  ]
+};
+
+export async function generateStaticParams() {
+  const locales = ['ro', 'en'];
+
+  const params: {locale: string; slug: string}[] = [];
+
+  for (const locale of locales) {
+    const posts = postsByLocale[locale] ?? [];
+    for (const post of posts) {
+      params.push({locale, slug: post.slug});
+    }
+  }
+
+  return params;
 }
 
-export default function BlogPost() {
-  const { slug } = useParams<{ slug: string }>()
-  const post = posts[slug]
+export default function BlogPostPage({
+  params
+}: {
+  params: {locale: string; slug: string};
+}) {
+  const {locale, slug} = params;
+
+  const posts = postsByLocale[locale] ?? [];
+  const post = posts.find((p) => p.slug === slug);
 
   if (!post) {
-    return (
-      <section className="container-max py-12">
-        <h1 className="text-2xl font-semibold">Articolul nu a fost găsit</h1>
-        <Link className="btn-ghost mt-4 inline-flex" href="/blog">Înapoi la blog</Link>
-      </section>
-    )
+    notFound();
   }
 
   return (
     <section className="container-max py-12 md:py-16">
-      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-        <div className="text-xs text-gray-500">{new Date(post.date).toLocaleDateString('ro-RO')}</div>
-        <h1 className="text-3xl md:text-4xl font-semibold mt-2">{post.title}</h1>
-        <article className="prose prose-slate mt-6 max-w-none">
-          <p>{post.content}</p>
-        </article>
-        <Link className="btn-ghost mt-6 inline-flex" href="/blog">← Înapoi la blog</Link>
-      </motion.div>
+      <article className="max-w-3xl">
+        <p className="text-sm text-gray-500 mb-2">
+          {locale === 'ro' ? 'Articol de blog' : 'Blog article'}
+        </p>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
+          {post!.title}
+        </h1>
+        <p className="text-lg text-gray-600 mb-8">{post!.excerpt}</p>
+        <div className="prose prose-slate">
+          {post!.content.split('\n').map((p, idx) => (
+            <p key={idx}>{p}</p>
+          ))}
+        </div>
+      </article>
     </section>
-  )
+  );
 }
