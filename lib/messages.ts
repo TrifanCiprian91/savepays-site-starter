@@ -1,11 +1,15 @@
-import {Locale} from '@/i18n/routing';
+// lib/messages.ts
+import type {Locale} from '@/i18n/routing';
 
 export async function getMessages(locale: Locale) {
   // Normalizează limba (fallback la 'ro' dacă nu e validă)
-  const safeLocale = ['ro', 'en'].includes(locale) ? locale : 'ro';
-
-  // Importă mesajele din fișierele JSON
-  const messages = (await import(`@/messages/${safeLocale}.json`)).default;
-
-  return messages;
+  switch (locale) {
+    case 'en':
+      return (await import('@/messages/en.json')).default;
+    case 'ro':
+    default:
+      return (await import('@/messages/ro.json')).default;
+  }
 }
+
+export default getMessages;
