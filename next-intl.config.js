@@ -1,6 +1,6 @@
 import {defineConfig} from 'next-intl';
 
 export default defineConfig({
-  locales: ['en', 'ro'],
+  locales: ['ro', 'en'],
   defaultLocale: 'ro'
 });
