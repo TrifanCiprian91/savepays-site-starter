@@ -6,11 +6,19 @@ export function generateStaticParams() {
   return [{locale: 'ro'}, {locale: 'en'}];
 }
 
-export default async function LocaleLayout({children, params: {locale}}) {
+export default async function LocaleLayout({
+  children,
+  params
+}: {
+  children: React.ReactNode;
+  params: {locale: string};
+}) {
+  const {locale} = params;
+
   let messages;
   try {
-    messages = (await import(`../../../messages/${locale}.json`)).default;
-  } catch {
+    messages = (await import(`../../messages/${locale}.json`)).default;
+  } catch (error) {
     notFound();
   }
 
