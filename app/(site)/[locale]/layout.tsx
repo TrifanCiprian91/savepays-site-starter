@@ -1,34 +1,25 @@
-import { NextIntlClientProvider } from 'next-intl';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import GoogleAnalytics from '@/lib/analytics';
-import CookieConsent from '@/components/CookieConsent';
+import {NextIntlClientProvider} from 'next-intl';
+import {notFound} from 'next/navigation';
 import '../../globals.css';
 
-export default async function LocaleLayout({
-  children,
-  params
-}: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
-  const { locale } = params;
+export function generateStaticParams() {
+  return [{locale: 'ro'}, {locale: 'en'}];
+}
 
-  const messages = (await import(`../../messages/${locale}.json`)).default;
+export default async function LocaleLayout({children, params: {locale}}) {
+  let messages;
+  try {
+    messages = (await import(`../../../messages/${locale}.json`)).default;
+  } catch {
+    notFound();
+  }
 
   return (
     <html lang={locale}>
       <body>
-        <CookieConsent />
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-
-        <Header />
-
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
         </NextIntlClientProvider>
-
-        <Footer />
       </body>
     </html>
   );

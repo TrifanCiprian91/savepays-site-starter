@@ -4,8 +4,5 @@ import {routing} from './i18n/routing';
 export default createMiddleware(routing);
 
 export const config = {
-  matcher: [
-    // Redirect everything that is NOT _next or api
-    '/((?!_next|api).*)'
-  ]
+  matcher: ['/((?!api|_next|.*\\..*).*)']
 };
